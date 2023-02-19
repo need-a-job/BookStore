@@ -10,11 +10,20 @@
     "@types/node": "^16.18.8",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
+    "axios": "^1.2.1",
+    "bootstrap": "^5.2.3",
+    "formik": "^2.2.9",
+    "fs": "^0.0.1-security",
     "react": "^18.2.0",
+    "react-client-session": "^0.0.8",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1",
+    "react-sessionstorage": "^1.0.5",
     "typescript": "^4.9.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11",
+    "yup-password": "^0.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,5 +48,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.3"
   }
 }
