@@ -1,9 +1,10 @@
 import { FunctionComponent } from "react";
 import { NavBar } from "./Navigate_page";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik"
 import axios from "axios";
 import contactUsSchema from "../validation/contact_us_validation";
+import Footer from "./Footer"
 
 interface ContactUsProps {}
 
@@ -11,7 +12,7 @@ const ContactUs: FunctionComponent<ContactUsProps> = () => {
   return (
     <div>
       <NavBar />
-      <h1 className="d-flex justify-content-center">Contact us</h1>
+      <h1 className="text-center text-white bg-dark">Contact us</h1>
       <section className="vh-100 bg-info">
         <div className="container h-100 -e">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -100,6 +101,7 @@ const ContactUs: FunctionComponent<ContactUsProps> = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

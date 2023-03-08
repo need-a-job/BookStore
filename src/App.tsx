@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 import { ReactSession } from "react-client-session";
 
 
@@ -11,16 +11,21 @@ import Home from "./components/home_page";
 import About from "./components/About_page";
 import ContactUs from "./components/ContactUs_page";
 import AddBook from "./components/AddBook_page";
-import Footer from "./components/Footer_page"
+import Basket from "./components/Basket"
+import YourBooks from "./components/Your_Books";
 
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+
+
+ReactSession.setStoreType("localStorage");
 function App() {
-  ReactSession.setStoreType("localStorage");
   return (
     <div className="App">
       <div className="form-wrapper">
         <BrowserRouter>
           <Switch>
-            <Route path="/" exact>
+            <Route exact path="/" >
               <Home />
             </Route>
             <Route path="/about">
@@ -38,8 +43,11 @@ function App() {
             <Route path="/addBook">
               <AddBook />
             </Route>
-            <Route path="/footer">
-              <Footer />
+            <Route path="/shop">
+              <Basket />
+            </Route>
+            <Route path="/yourBooks">
+              <YourBooks />
             </Route>
           </Switch>
         </BrowserRouter>

@@ -4,6 +4,8 @@ import RegisterSchema from "../validation/register.validation";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavBar } from "./Navigate_page";
+import Footer from "./Footer"
+import { useHistory } from "react-router-dom";
 
 interface RegisterProps {
   name: string;
@@ -13,10 +15,11 @@ interface RegisterProps {
 }
 
 const Register: FunctionComponent<RegisterProps> = () => {
+  let history = useHistory();
   return (
     <div>
       <NavBar />
-      <h1 className="d-flex justify-content-center">Register</h1>
+      <h1 className="text-center text-white bg-dark">Register</h1>
 
       <Formik
         initialValues={{
@@ -32,6 +35,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
             .then((Response) => console.log(Response))
             .catch((err) => console.log(err));
           console.log(values);
+          history.push("/")
         }}
       >
         {({ errors, touched }) => (
@@ -98,8 +102,8 @@ const Register: FunctionComponent<RegisterProps> = () => {
                               <img
                                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
                                 className="img-fluid"
-                                alt="Sample image"
-                              ></img>
+                                alt="Sample"
+                               />
                             </div>
                           </Form>
                         </div>
@@ -112,6 +116,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
           </section>
         )}
       </Formik>
+      <Footer />
     </div>
   );
 };

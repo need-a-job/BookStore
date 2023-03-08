@@ -5,6 +5,7 @@ import { NavBar } from "./Navigate_page";
 import bookSchema from "../validation/book_validation";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ReactSession } from "react-client-session";
+import Footer from "./Footer"
 
 interface AddBookProps {}
 
@@ -12,7 +13,7 @@ const AddBook: FunctionComponent<AddBookProps> = () => {
   return (
     <div>
       <NavBar />
-      <h1 className="d-flex justify-content-center">Add Book</h1>
+      <h1 className="text-center text-white bg-dark">Add book</h1>
       <section className="vh-100 bg-info">
         <div className="container h-100 -e">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -138,6 +139,7 @@ const AddBook: FunctionComponent<AddBookProps> = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

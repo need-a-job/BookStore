@@ -4,7 +4,11 @@ import LoginSchema from "../validation/login_validation";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavBar } from "./Navigate_page";
+import Footer from "./Footer";
 import { ReactSession } from "react-client-session";
+import { useHistory } from "react-router-dom";
+
+
 
 interface LoginProps {
   email: string;
@@ -13,11 +17,12 @@ interface LoginProps {
 }
 
 const Login: FunctionComponent<LoginProps> = () => {
+let history = useHistory();
   return (
     <div>
       <i className="bi bi-arrow-through-heart-fill"></i>
       <NavBar />
-      <h1 className="d-flex justify-content-center">Login</h1>
+      <h1 className="text-center text-white bg-dark">Login</h1>
       <section className="vh-100 bg-info">
         <div className="container h-50 -e">
           <div className="row d-flex justify-content-center align-items-center h-100">
@@ -32,7 +37,8 @@ const Login: FunctionComponent<LoginProps> = () => {
                     }}
                     validationSchema={LoginSchema}
                     onSubmit={(values) => {
-                      axios
+                      
+                      axios 
                         .post("http://localhost:8000/api/login/login", values)
                         .then((response) => {
                           console.log("resp", response);
@@ -47,6 +53,7 @@ const Login: FunctionComponent<LoginProps> = () => {
                           console.log("val", values);
                           console.log({ isBizz });
                           console.log(userIdGet);
+                          history.push("/");
                         })
                         .catch((err) => console.log("err", err));
                     }}
@@ -87,7 +94,7 @@ const Login: FunctionComponent<LoginProps> = () => {
           </div>
         </div>
       </section>
-      ;
+      <Footer />
     </div>
   );
 };
