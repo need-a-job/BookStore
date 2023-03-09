@@ -12,21 +12,10 @@ const Home: FunctionComponent<HomeProps> = () => {
   return (
     <div>
       <NavBar />
-
       <h1 className="text-center text-white bg-dark">Home</h1>
-
+      <BookCard />
       <div className="container">
-        <div className=" d-lg-flex justify-content-lg-around ">
-
-          <BookCard />
-
-
-        </div>{" "}
-        {/*row */}
-      </div>{" "}
-      {/*container */}
-      <div className="container">
-        <div className="d-lg-flex justify-content-lg-around t">
+        <div className="d-lg-flex justify-content-lg-around ">
           <div className="card col">
             <img src="..." className="card-img-top" alt="..." />
             <div className="card-body">

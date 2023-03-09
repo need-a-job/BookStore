@@ -31,22 +31,24 @@ const BookCard: FunctionComponent<BookCardProps> = () => {
     else if (!data.length) return <h1>No data available</h1>;
     else {
         return (
-            <div className="app" style={{ marginLeft: "5em" }}>
-                {data.map((item) => (
-                    <div className="card col m-3">
-                        <img src="" className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title">{item.name}</h5>
-                            <p className="card-text">{item.author}</p>
-                            <p className="card-text">{item.price}</p>
-                            <p className="card-text">{item.sold}</p>
-                            <p className="card-text">{item.release_date}</p>
-                            <a href="#" className="btn btn-primary">
-                                buy
-                            </a>
+            <div className="container">
+                <div className=" d-lg-flex justify-content-lg-around ">
+                    {data.map((item) => (
+                        <div className="card col m-3 d-sm-flex justify-content-sm-center" style={{ width: "18rem" }}>
+                            <img src={item.image} className="card-img-top" alt="..." />
+                            <div className="card-body">
+                                <h5 className="card-title">{item.name}</h5>
+                                <p className="card-text">{item.author}</p>
+                                <p className="card-text">{item.price}</p>
+                                <p className="card-text">{item.sold}</p>
+                                <p className="card-text">{item.release_date}</p>
+                                <button className="btn btn-primary">
+                                    buy
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         );
     }
