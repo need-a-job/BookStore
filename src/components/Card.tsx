@@ -56,7 +56,7 @@ const BookCard: FunctionComponent<BookCardProps> = () => {
                                     <li className="list-group-item">Release date: {item.release_date}</li>
                                 </ul>
                                 <div className="card-body d-flex justify-content-around">
-                                    <button className="card-button" onClick={() => { add_to_cart(item._id)} } >buy</button>
+                                    <button className="card-button" onClick={() => { add_to_cart(item._id) }} >buy</button>
                                 </div>
                             </div>
                         </div>

@@ -17,6 +17,6 @@ const BookSchema = Yup.object().shape({
   sold: Yup.number(),
   release_date: Yup.string().min(2, "Too Short!").max(225, "Too Long!"),
   children: Yup.boolean(),
-  image: Yup.string(),
+  image: Yup.object(),
 });
 export default BookSchema;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, useFormikContext } from "formik";
 import { FunctionComponent } from "react";
 import { NavBar } from "./Navigate_page";
 import bookSchema from "../validation/book_validation";
@@ -7,7 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ReactSession } from "react-client-session";
 import Footer from "./Footer"
 
-interface AddBookProps { }
+interface AddBookProps {
+}
 
 const AddBook: FunctionComponent<AddBookProps> = () => {
   return (
@@ -21,6 +22,7 @@ const AddBook: FunctionComponent<AddBookProps> = () => {
               <div className="card-body p-md-5">
                 <div className="row justify-content-center">
                   <Formik
+
                     initialValues={{
                       userId: "",
                       name: "",
@@ -30,26 +32,34 @@ const AddBook: FunctionComponent<AddBookProps> = () => {
                       children: false,
                       image: null,
                     }}
-                    validationSchema={bookSchema}
-                    onSubmit={(values, { setSubmitting }) => {
+
+                    onSubmit={(values) => {
+                      console.log('submit');
                       setTimeout(() => {
                         alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
                       }, 1000);
                       values.userId = ReactSession.get("_id");
-
+                      const formData = new FormData()
+                      for (const [key, value] of Object.entries(values)) {
+                        formData.append(key, String(value));
+                      }
+                      console.log(formData)
                       axios
                         .post(
                           "http://localhost:8000/api/book/book_publish",
-                          values
+                          formData
                         )
                         .then((response) => {
+                          console.log(values)
                           values.userId = response.data.user.userId;
+                        }).catch((err) => {
+                          console.log(err)
+                          console.log(values)
                         });
                     }}
                   >
-                    {({ errors, touched }) => (
-                      <Form>
+                    {(formik) => (
+                      <Form encType="multipart/form-data">
                         <div className="form-group">
                           <label htmlFor="name">Name</label>
                           <Field
@@ -57,8 +67,8 @@ const AddBook: FunctionComponent<AddBookProps> = () => {
                             className="form-control"
                             type="text"
                           />
-                          {errors.name && touched.name ? (
-                            <div>{errors.name}</div>
+                          {formik.errors.name && formik.touched.name ? (
+                            <div>{formik.errors.name}</div>
                           ) : null}
                         </div>
 
@@ -69,8 +79,8 @@ const AddBook: FunctionComponent<AddBookProps> = () => {
                             className="form-control"
                             type="text"
                           />
-                          {errors.author && touched.author ? (
-                            <div>{errors.author}</div>
+                          {formik.errors.author && formik.touched.author ? (
+                            <div>{formik.errors.author}</div>
                           ) : null}
                         </div>
 
@@ -81,8 +91,8 @@ const AddBook: FunctionComponent<AddBookProps> = () => {
                             className="form-control"
                             type="text"
                           />
-                          {errors.price && touched.price ? (
-                            <div>{errors.price}</div>
+                          {formik.errors.price && formik.touched.price ? (
+                            <div>{formik.errors.price}</div>
                           ) : null}
                         </div>
 
@@ -93,8 +103,8 @@ const AddBook: FunctionComponent<AddBookProps> = () => {
                             className="form-control"
                             type="calendar"
                           />
-                          {errors.release_date && touched.release_date ? (
-                            <div>{errors.release_date}</div>
+                          {formik.errors.release_date && formik.touched.release_date ? (
+                            <div>{formik.errors.release_date}</div>
                           ) : null}
                         </div>
                         <div className="form-check">
@@ -116,11 +126,18 @@ const AddBook: FunctionComponent<AddBookProps> = () => {
                             >
                               Choose file
                             </label>
-                            <Field
+                            <input
                               name="image"
                               className="form-control"
                               id="image"
                               accept="image/*"
+                              type="file"
+                              value={undefined}
+                              onChange={(event: any) => {
+                                console.log(event)
+                                formik.setFieldValue("image", event.currentTarget.files[0])
+                                console.log(formik.values)
+                              }}
                             />
                           </div>
                         </div>
