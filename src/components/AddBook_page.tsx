@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ReactSession } from "react-client-session";
 import Footer from "./Footer"
 
-interface AddBookProps {}
+interface AddBookProps { }
 
 const AddBook: FunctionComponent<AddBookProps> = () => {
   return (
@@ -28,7 +28,7 @@ const AddBook: FunctionComponent<AddBookProps> = () => {
                       price: "",
                       release_date: "",
                       children: false,
-                      image: "",
+                      image: null,
                     }}
                     validationSchema={bookSchema}
                     onSubmit={(values, { setSubmitting }) => {
@@ -117,7 +117,6 @@ const AddBook: FunctionComponent<AddBookProps> = () => {
                               Choose file
                             </label>
                             <Field
-                              type="file"
                               name="image"
                               className="form-control"
                               id="image"

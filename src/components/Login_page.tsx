@@ -10,14 +10,15 @@ import { useHistory } from "react-router-dom";
 
 
 
+
 interface LoginProps {
   email: string;
   password: string;
   isBizz: boolean;
 }
 
-const Login: FunctionComponent<LoginProps> = () => {
-let history = useHistory();
+const Login: FunctionComponent<LoginProps> = (props) => {
+  let history = useHistory();
   return (
     <div>
       <i className="bi bi-arrow-through-heart-fill"></i>
@@ -37,8 +38,8 @@ let history = useHistory();
                     }}
                     validationSchema={LoginSchema}
                     onSubmit={(values) => {
-                      
-                      axios 
+
+                      axios
                         .post("http://localhost:8000/api/login/login", values)
                         .then((response) => {
                           console.log("resp", response);

@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { NavBar } from "./Navigate_page";
 import Footer from "./Footer"
 import { useHistory } from "react-router-dom";
-
+import { ReactSession } from "react-client-session"
 interface RegisterProps {
   name: string;
   email: string;
@@ -32,10 +32,24 @@ const Register: FunctionComponent<RegisterProps> = () => {
         onSubmit={(values) => {
           axios
             .post("http://localhost:8000/api/register/register", values)
-            .then((Response) => console.log(Response))
+            .then((response) => {
+              console.log(response)
+              console.log(values);
+              console.log(response.data)
+              values.email = response.data.email;
+              values.password = response.data.password;
+              values.isBizz = response.data.isBizz;
+              const userId = response.data._id;
+              ReactSession.set("bizz", values.isBizz);
+              ReactSession.set("_id", userId);
+              ReactSession.set("cart", JSON.stringify([]))
+              const isBizz = ReactSession.get("bizz");
+              const userIdGet = ReactSession.get("_id");            
+              console.log({ isBizz });
+              console.log(userIdGet);
+              history.push("/")
+            })
             .catch((err) => console.log(err));
-          console.log(values);
-          history.push("/")
         }}
       >
         {({ errors, touched }) => (
@@ -103,7 +117,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
                                 className="img-fluid"
                                 alt="Sample"
-                               />
+                              />
                             </div>
                           </Form>
                         </div>
